@@ -3,10 +3,10 @@ from tensorflow.keras import Model
 from tensorflow.keras.layers import Input, LSTM, Dense
 
 # Hyper parameters
-batch_size = 50 
-epochs = 5 
+batch_size = 128 
+epochs = 200 
 latent_dim = 512 
-num_samples = 100
+num_samples = 1000000 
 
 # Sample file names
 source_file = 'sample_data/europarl-v7.et-en.en'
@@ -102,6 +102,7 @@ model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accur
 model.fit([encoder_source_data, decoder_source_data], decoder_target_data,
           batch_size=batch_size,
           epochs=epochs,
+	  verbose=2,
           validation_split=0.2)
 
 print('Saving model')
