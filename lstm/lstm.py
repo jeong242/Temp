@@ -43,8 +43,12 @@ train_size = len(Xtrain)//Batch_size * Batch_size
 
 Xtrain, Ytrain = Xtrain[0:train_size], Ytrain[0:train_size]
 
+"""
 for i in range(Num_epochs):
 	model.fit(Xtrain, Ytrain, batch_size=Batch_size, epochs=1,
+						validation_split=0.2, verbose=0)
+"""
+model.fit(Xtrain, Ytrain, batch_size=Batch_size, epochs=Num_epochs,
 						validation_split=0.2, verbose=0)
 
 score,_ = model.evaluate(Xtrain,Ytrain, batch_size=Batch_size, verbose=0)
