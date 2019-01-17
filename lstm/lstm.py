@@ -49,7 +49,7 @@ for i in range(Num_epochs):
 						validation_split=0.2, verbose=0)
 """
 model.fit(Xtrain, Ytrain, batch_size=Batch_size, epochs=Num_epochs,
-						validation_split=0.2, verbose=0)
+						validation_split=0.2, verbose=2)
 
 score,_ = model.evaluate(Xtrain,Ytrain, batch_size=Batch_size, verbose=0)
 rmse = math.sqrt(score)
