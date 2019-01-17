@@ -6,7 +6,7 @@ from tensorflow.keras.layers import Input, LSTM, Dense
 batch_size = 128 
 epochs = 200 
 latent_dim = 512 
-num_samples = 1000000 
+num_samples = 10000 
 
 # Sample file names
 source_file = 'sample_data/europarl-v7.et-en.en'
@@ -102,7 +102,7 @@ model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accur
 model.fit([encoder_source_data, decoder_source_data], decoder_target_data,
           batch_size=batch_size,
           epochs=epochs,
-	  verbose=2,
+	  verbose=1,
           validation_split=0.2)
 
 print('Saving model')
