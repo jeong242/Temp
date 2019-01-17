@@ -21,7 +21,7 @@ db = MongoClient('13.125.150.105',
 BTC_1 = list(db.get_collection('BTC_USD_1MIN').find({}))
 
 Xtrain = np.empty(shape=(len(BTC_1),1,4))
-Ytrain = np.empty(shape=(len(BTC_1),1,1))
+Ytrain = np.empty(shape=(len(BTC_1),1))
 
 for i in range(len(BTC_1)-1):
 	Xtrain[i,0,0] = BTC_1[i]['price_open']
@@ -29,7 +29,7 @@ for i in range(len(BTC_1)-1):
 	Xtrain[i,0,2] = BTC_1[i]['price_high']
 	Xtrain[i,0,3] = BTC_1[i]['price_low']
 
-	Ytrain[i,0,0] = BTC_1[i+1]['price_open']
+	Ytrain[i,0] = BTC_1[i+1]['price_open']
 
 model = Sequential()
 model.add(LSTM(259, input_shape=(1,4), go_backwards=True,
