@@ -1,8 +1,12 @@
 import numpy as np
+import math
 from tensorflow.keras import Sequential
 from tensorflow.keras.layers import LSTM, Dense 
 import pymongo
 from pymongo import MongoClient
+
+Num_epochs = 480
+Batch_size = 160
 
 
 """

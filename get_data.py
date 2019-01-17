@@ -7,4 +7,4 @@ db = MongoClient('13.125.150.105',
 									password='voteAdmin',
 									authSource='BINANCE').BINANCE 
 BTC_15 = list(db.get_collection('BTC_USD_15MIN').find({}))
-
+BTC_1  = list(db.get_collection('BTC_USD_1MIN').find({}))
