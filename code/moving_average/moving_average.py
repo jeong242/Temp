@@ -60,6 +60,24 @@ def for_plot(moving_average, list, Window_size):
 	_, _, f, p = measure(moving_average, list, Window_size)
 	return f,p
 
+# MAE
+def mae(moving_average, list, Window_size):
+	f,p = for_plot(moving_average, list, Window_size)
+	import numpy as np
+	f = np.array(f)
+	p = np.array(p)
+	return  sum(np.abs(f-p)) / len(f)
+
+# RMSE
+def rmse(moving_average, list, Window_size):
+	f,p = for_plot(moving_average, list, Window_size)
+	import numpy as np
+	import math
+	f = np.array(f)
+	p = np.array(p)
+	return  math.sqrt( sum((f-p) ** 2)/len(f) )
+	
+
 # Find the percentage of correct predictions.
 def get_accuracy(moving_average, list, Window_size):
 	result = measure(moving_average, list, Window_size)
