@@ -2,24 +2,14 @@ import numpy as np
 import math
 from tensorflow.keras import Sequential
 from tensorflow.keras.layers import LSTM, Dense 
-import pymongo
-from pymongo import MongoClient
+import json
 
 Num_epochs = 480
 Batch_size = 160
 
-
-"""
-{'_id': ObjectId('5c3f1217c30ba54698d8c0b8'), 'price_high': 3598.27, 'volume_traded': 30.971274, 'time_period_end': '2019-01-13 12:01:00', 'price_close': 3596.97, 'price_open': 3593.27, 'time_period_start': '2019-01-13 12:00:00', 'price_low': 3593.03}
-"""
-
-db = MongoClient('13.125.150.105',
-								 	27017, 
-									username='voteAdmin', 
-									password='voteAdmin',
-									authSource='BINANCE').BINANCE 
-BTC_1 = list(db.get_collection('BTC_USD_1MIN').find({}))
-
+with open('../../data/BTC_1.json', 'r') as r:
+	BTC_1 = json.load(r)
+ 
 Xtrain = np.empty(shape=(len(BTC_1),1,4))
 Ytrain = np.empty(shape=(len(BTC_1),1))
 
