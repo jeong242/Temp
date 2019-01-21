@@ -26,7 +26,7 @@ def alpha_moving_average(start_index, list, Window_size):
 
 	for i in range(start_index+1, start_index+Window_size):
 		multiplier *= (1-alpha)
-		average += (list[i] * multiplier) 
+		average += (float(list[i]) * multiplier) 
 	return average
 
 """
