@@ -1,4 +1,5 @@
 import json
+alpha = 0.5
 
 ##### Different moving average functions #####
 # Simple moving average
