@@ -25,9 +25,10 @@ def weighted_moving_average(start_index, list, Window_size):
 
 # 'i' for increase / 'c' for constant / 'd' for decrease
 def delta(init, final):
-	if final > init:
+	diff = final - init
+	if diff > 0.0005:
 		return 'i'
-	elif final == init:
+	elif diff >= -0.0005:
 		return 'c'
 	return 'd'
 
