@@ -42,13 +42,13 @@ def measure(moving_average, list, Window_size):
 	count = 0
 	finals = []
 	predicteds = []
-	total_iter = len(list)-2*Window_size+1
+	total_iter = len(list)-2*Window_size
 
 	for i in range(total_iter):
 		# initial value of the sample data
-		init = float(list[i+Window_size]['price_close'])
+		init = float(list[i+Window_size-1]['price_close'])
 		# final value of the sample data
-		final = float(list[i+2*Window_size-2]['price_open'])
+		final = float(list[i+2*Window_size]['price_open'])
 		# "known" sample data for predicting Window_size later
 		known = [list[n]['price_open'] for n in range(i,i+Window_size)]	
 
