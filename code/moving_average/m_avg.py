@@ -75,6 +75,9 @@ def measure(moving_average, list, Window_size):
 		predicted_result = delta(init,predicted)
 		if true_result == predicted_result:
 			count += 1
+
+		print('Initial time: ' + list[i+Window_size-1]['time_period_end'])
+		print('Final   time: ' + list[i+2*Window_size]['time_period_start']+'\n')
 	return count, total_iter, finals, predicteds 
 
 # Return lists of true final values & predicted values.
