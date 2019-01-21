@@ -19,6 +19,15 @@ def weighted_moving_average(start_index, list, Window_size):
 		j += 1 
 	return average/sum(fib_list)
 
+def alpha_moving_average(start_index, list, Window_size):
+	multiplier = alpha
+	average = list[i] * multiplier
+
+	for i in range(start_index+1, start_index+Window_size):
+		multiplier *= (1-alpha)
+		average += (list[i] * multiplier) 
+	return average
+
 """
 {'price_high': 3584.11, 'volume_traded': 33.525391, 'time_period_end': '2019-01-13 08:01:00', 'price_close': 3579.47, 'price_open': 3584.1, 'time_period_start': '2019-01-13 08:00:00', 'price_low': 3579.47}
 """
