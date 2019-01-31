@@ -3,6 +3,8 @@ from pymongo import MongoClient
 import json
 import get_data 
 import m_avg
+from datetime import datetime
+from pytz import timezone
 
 # Either Rise / Steady / Fall
 prediction = m_avg.measure(m_avg.simple_moving_average, get_data.BTC_1)
