@@ -42,10 +42,6 @@ def delta(init, final):
 		return "Steady"
 	return "Fall"
 
-# Load sample data
-with open('../../data/BTC_1.json', 'r') as r:
-	BTC_1 = json.load(r)
-
 ##### Prediction using moving average #####
 # Return number of correct predictions.
 def measure(moving_average, list):
