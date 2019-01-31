@@ -8,7 +8,7 @@ from pytz import timezone
 
 # KST timezone
 kst = datetime.now(tz=timezone("Asia/Seoul"))
-kst_list = list(kst.timetuple())
+kst = kst.replace(hour=(kst.hour+2)%24)
 prediction_time = kst.strftime("%Y-%m-%d %H:00:00")
 
 # Either Rise / Steady / Fall
