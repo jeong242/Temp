@@ -4,11 +4,11 @@ import json
 import get_data 
 import m_avg
 from datetime import datetime
+from datetime import timedelta
 from pytz import timezone
 
 # KST timezone
-kst = datetime.now(tz=timezone("Asia/Seoul"))
-kst = kst.replace(hour=(kst.hour+2)%24)
+kst = datetime.now(tz=timezone("Asia/Seoul")) + timedelta(hours=2)
 prediction_time = kst.strftime("%Y-%m-%d %H:00:00")
 
 # Either Rise / Steady / Fall
