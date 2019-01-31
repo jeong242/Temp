@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 from pymongo import MongoClient
 import json
 import get_data 
