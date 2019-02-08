@@ -4,7 +4,7 @@ from tensorflow.keras import Sequential
 from tensorflow.keras.layers import LSTM, Dense 
 import json
 
-Num_epochs = 480
+Num_epochs = 100
 Batch_size = 160
 
 with open('../../data/BTC_1.json', 'r') as r:
@@ -51,11 +51,13 @@ Xtrain, Ytrain = Xtrain[0:train_size], Ytrain[0:train_size]
 
 for i in range(Num_epochs):
 	model.fit(Xtrain, Ytrain, batch_size=Batch_size, epochs=1,
-						validation_split=0.2, verbose=1)
+						validation_split=0.2, verbose=0)
 """
 model.fit(Xtrain, Ytrain, batch_size=Batch_size, epochs=Num_epochs,
 						validation_split=0.2, verbose=2)
 """
+
+model.save('lstm.h5')
 
 score,_ = model.evaluate(Xtrain,Ytrain, batch_size=Batch_size, verbose=0)
 rmse = math.sqrt(score)
