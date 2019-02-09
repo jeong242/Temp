@@ -60,7 +60,7 @@ def model_building():
 def model_learning(model):
 	for i in range(Num_epochs):
 		model.fit(Xtrain, Ytrain, batch_size=Batch_size, epochs=1,
-							validation_split=0.2, verbose=1)
+							validation_split=0.2, verbose=2)
 
 # return the correct percentage.
 # num_of_correct / num_of_total * 100
