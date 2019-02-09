@@ -4,7 +4,7 @@ from tensorflow.keras import Sequential
 from tensorflow.keras.layers import LSTM, Dense 
 import json
 
-Num_epochs = 1
+Num_epochs = 150
 Batch_size = 160
 Train_ratio = 0.7
 
