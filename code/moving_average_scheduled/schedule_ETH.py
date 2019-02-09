@@ -14,7 +14,7 @@ prediction_time = kst.strftime("%Y-%m-%d %H:00:00")
 # Either Rise / Steady / Fall
 prediction = m_avg.measure(m_avg.weighted_moving_average, get_data.BTC_1)
 
-Client = MongoClient(host="13.125.150.105", port=27017, username="voteAdmin", password="voteAdmin")
+Client = MongoClient(host="13.125.150.105", port=27017, username="goai", password="goai34")
 
 result = {"H_nick_name":"moving_avg",
 	  "H_model_name":"GoGoAI",
