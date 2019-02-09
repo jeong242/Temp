@@ -1,6 +1,7 @@
 import numpy as np
 import math
 from tensorflow.keras import Sequential
+from tensorflow.keras.optimizers import SGD
 from tensorflow.keras.layers import LSTM, Dense 
 import json
 
@@ -49,7 +50,9 @@ def model_building():
 	model.add(LSTM(240, input_shape=(120,4), go_backwards=True,
 							 activation='relu',return_sequences=False))
 	model.add(Dense(3))
-	model.compile(loss='mean_squared_error', optimizer='adam',
+	"""model.compile(loss='mean_squared_error', optimizer='adam',
+							metrics=['mean_squared_error'])"""
+	model.compile(loss='mean_squared_error', optimizer=SGD(lr=0.01, clipnorm=1.),
 							metrics=['mean_squared_error'])
 	
 	return model
