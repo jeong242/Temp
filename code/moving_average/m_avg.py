@@ -1,4 +1,5 @@
 import json
+every = 90 
 alpha = 0.5
 
 ##### Different moving average functions #####
@@ -48,23 +49,24 @@ with open('../../data/BTC_1.json', 'r') as r:
 
 ##### Prediction using moving average #####
 # Return number of correct predictions.
-def measure(moving_average, list, Window_size):
+def measure(moving_average, list, Window_size=0):
 	count = 0
 	finals = []
 	predicteds = []
-	total_iter = len(list)-2*Window_size
+	bound = len(list)-211
+	total_iter = 0
 
-	for i in range(total_iter):
+	for i in range(0,bound,every):
 		# initial value of the sample data
-		init = float(list[i+Window_size-1]['price_close'])
+		init = float(list[i+90]['price_close'])
 		# final value of the sample data
-		final = float(list[i+2*Window_size]['price_open'])
+		final = float(list[i+211]['price_open'])
 		# "known" sample data for predicting Window_size later
-		known = [list[n]['price_open'] for n in range(i,i+Window_size)]	
+		known = [list[n]['price_open'] for n in range(i,i+120)]	
 
 		# Predicting using moving average method
-		for j in range(Window_size):
-			predicted = moving_average(0,known,Window_size+j)
+		for j in range(90):
+			predicted = moving_average(0,known,120+j)
 			known += [predicted]
 		
 		# Update the lists
@@ -76,8 +78,10 @@ def measure(moving_average, list, Window_size):
 		if true_result == predicted_result:
 			count += 1
 
-		print('Initial time: ' + list[i+Window_size-1]['time_period_end'])
-		print('Final   time: ' + list[i+2*Window_size]['time_period_start']+'\n')
+		print('Initial time: ' + list[i+90]['time_period_end'])
+		print('Final   time: ' + list[i+211]['time_period_start']+'\n')
+		total_iter += 1
+
 	return count, total_iter, finals, predicteds 
 
 # Return lists of true final values & predicted values.
@@ -104,6 +108,6 @@ def rmse(moving_average, list, Window_size):
 	
 
 # Find the percentage of correct predictions.
-def get_accuracy(moving_average, list, Window_size):
+def get_accuracy(moving_average, list, Window_size=0):
 	result = measure(moving_average, list, Window_size)
 	return (result[0]/result[1])*100

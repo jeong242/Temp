@@ -5,9 +5,9 @@ from tensorflow.keras.optimizers import SGD
 from tensorflow.keras.layers import LSTM, Dense 
 import json
 
-Num_epochs = 110
+Num_epochs = 100
 Batch_size = 160
-Train_ratio = 0.7
+Train_ratio = 0.6
 
 # 'i' for increase / 'c' for constant / 'd' for decrease
 def delta(init, final):
@@ -31,7 +31,8 @@ def data_preprocessing():
 					X[i,j-i,1] = float(BTC_1[j]['price_close']) / 1000
 					X[i,j-i,2] = float(BTC_1[j]['price_high']) / 1000
 					X[i,j-i,3] = float(BTC_1[j]['price_low']) / 1000
-			change = delta(BTC_1[i]['price_open'],BTC_1[i+210]['price_open'])
+
+			change = delta(BTC_1[i+90]['price_open'],BTC_1[i+210]['price_open'])
 			if change=="Fall":
 					Y[i,0] = 1
 			elif change=="Steady":
@@ -47,8 +48,10 @@ def data_preprocessing():
 
 def model_building():
 	model = Sequential()
-	model.add(LSTM(240, input_shape=(120,4), go_backwards=True,
-							 activation='relu',return_sequences=False))
+	model.add(LSTM(512, input_shape=(120,4), go_backwards=True,
+			 activation='relu',return_sequences=True))
+	model.add(LSTM(256, go_backwards=True,
+			 activation='relu',return_sequences=False))
 	model.add(Dense(3))
 	"""model.compile(loss='mean_squared_error', optimizer='adam',
 							metrics=['mean_squared_error'])"""
@@ -60,7 +63,10 @@ def model_building():
 def model_learning(model):
 	for i in range(Num_epochs):
 		model.fit(Xtrain, Ytrain, batch_size=Batch_size, epochs=1,
-							validation_split=0.2, verbose=1)
+							validation_split=0.1, verbose=1)
+		if i%5 == 0:
+			correct_ratio = compare(model, Xtest, Ytest)
+			print("correct ratio = %d"%correct_ratio+"%")
 
 # return the correct percentage.
 # num_of_correct / num_of_total * 100

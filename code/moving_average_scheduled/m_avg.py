@@ -48,14 +48,14 @@ def measure(moving_average, list):
 	# length of list of bitcoin prices.
 	size = len(list)
 	# initial value of the sample data
-	init = float(list[0]['price_close'])
+	init = float(list[89]['price_close'])
 	# "known" sample data for predicting Window_size later
 	known = [list[n]['price_open'] for n in range(size)]	
 
 	print("size = "+str(size))
 
 	# Predicting using moving average method
-	for j in range(size):
+	for j in range(size-30):
 		predicted = moving_average(0,known,size+j)
 		known += [predicted]
 		print(predicted)
