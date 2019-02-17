@@ -12,7 +12,7 @@ kst = datetime.now(tz=timezone("Asia/Seoul")) + timedelta(hours=2)
 prediction_time = kst.strftime("%Y-%m-%d %H:00:00")
 
 # Either Rise / Steady / Fall
-prediction = m_avg.measure(m_avg.weighted_moving_average, get_data.BTC_1)
+prediction = m_avg.measure(m_avg.alpha_moving_average, get_data.BTC_1)
 
 Client = MongoClient(host="13.125.150.105", port=27017)
 result = {"H_nick_name":"moving_avg",

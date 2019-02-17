@@ -1,5 +1,5 @@
 import json
-every = 90 
+every = 10 
 alpha = 0.033499
 
 ##### Different moving average functions #####
