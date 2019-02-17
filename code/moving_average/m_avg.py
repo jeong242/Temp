@@ -1,6 +1,6 @@
 import json
 every = 90 
-alpha = 0.5
+alpha = 0.033499
 
 ##### Different moving average functions #####
 # Simple moving average
@@ -23,7 +23,7 @@ def weighted_moving_average(start_index, list, Window_size):
 
 def alpha_moving_average(start_index, list, Window_size):
 	multiplier = alpha
-	average = list[0] * multiplier
+	average = float(list[0]) * multiplier
 
 	for i in range(start_index+1, start_index+Window_size):
 		multiplier *= (1-alpha)
