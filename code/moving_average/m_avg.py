@@ -69,6 +69,14 @@ def measure(moving_average, list, Window_size=0):
 			predicted = moving_average(0,known,120+j)
 			known += [predicted]
 		
+		known = [list[n]['price_open'] for n in range(i,i+120)]	
+		# Predicting using moving average method
+		for j in range(90):
+			predicted1 = simple_moving_average(0,known,120+j)
+			known += [predicted1]
+		
+		predicted = (predicted + predicted1) / 2
+
 		# Update the lists
 		finals += [final]
 		predicteds += [predicted]
