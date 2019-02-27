@@ -45,6 +45,7 @@ def delta(init, final):
 ##### Prediction using moving average #####
 # Return number of correct predictions.
 def measure(moving_average, list):
+	from numpy import random 
 	# length of list of bitcoin prices.
 	size = len(list)
 	# initial value of the sample data
@@ -57,7 +58,7 @@ def measure(moving_average, list):
 	# Predicting using moving average method
 	for j in range(size-30):
 		predicted = moving_average(0,known,size+j)
-		known += [predicted]
+		known += [predicted + random.normal(0,0.02)]
 		print(predicted)
 
 	return delta(init,predicted)

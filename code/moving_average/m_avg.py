@@ -1,5 +1,5 @@
 import json
-every = 10 
+every = 240 
 alpha = 0.033499
 
 ##### Different moving average functions #####
@@ -46,10 +46,13 @@ def delta(init, final):
 # Load sample data
 with open('../../data/BTC_1.json', 'r') as r:
 	BTC_1 = json.load(r)
+with open('../../data/ETH_1.json', 'r') as r:
+	ETH_1 = json.load(r)
 
 ##### Prediction using moving average #####
 # Return number of correct predictions.
-def measure(moving_average, list, Window_size=0):
+def measure(moving_average, list, Window_size=0, normal = True, mu=0, sd=1):
+	from numpy import random
 	count = 0
 	finals = []
 	predicteds = []
@@ -67,14 +70,19 @@ def measure(moving_average, list, Window_size=0):
 		# Predicting using moving average method
 		for j in range(90):
 			predicted = moving_average(0,known,120+j)
-			known += [predicted]
+			if normal:
+				known += [predicted+random.normal(mu,sd)]
+			else:
+				known += [predicted]
 		
 		known = [list[n]['price_open'] for n in range(i,i+120)]	
+		"""
 		# Predicting using moving average method
 		for j in range(90):
 			predicted1 = simple_moving_average(0,known,120+j)
 			known += [predicted1]
-		
+		"""
+		predicted1 = predicted
 		predicted = (predicted + predicted1) / 2
 
 		# Update the lists
@@ -86,8 +94,8 @@ def measure(moving_average, list, Window_size=0):
 		if true_result == predicted_result:
 			count += 1
 
-		print('Initial time: ' + list[i+90]['time_period_end'])
-		print('Final   time: ' + list[i+211]['time_period_start']+'\n')
+#		print('Initial time: ' + list[i+90]['time_period_end'])
+#		print('Final   time: ' + list[i+211]['time_period_start']+'\n')
 		total_iter += 1
 
 	return count, total_iter, finals, predicteds 
@@ -116,6 +124,6 @@ def rmse(moving_average, list, Window_size):
 	
 
 # Find the percentage of correct predictions.
-def get_accuracy(moving_average, list, Window_size=0):
-	result = measure(moving_average, list, Window_size)
+def get_accuracy(moving_average, list, normal=True,mu=0,sd=1):
+	result = measure(moving_average, list,0,normal,mu,sd)
 	return (result[0]/result[1])*100

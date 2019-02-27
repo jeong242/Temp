@@ -10,11 +10,13 @@ db = MongoClient('13.125.150.105',
 									username='voteAdmin', 
 									password='voteAdmin',
 									authSource='BINANCE').BINANCE 
-
+"""
 BTC_1_temp  = list(db.get_collection('BTC_USD_1MIN').find({}))
-
 BTC_15_temp = list(db.get_collection('BTC_USD_15MIN').find({}))
 BTC_30_temp  = list(db.get_collection('BTC_USD_30MIN').find({}))
+"""
+
+ETH_1_temp  = list(db.get_collection('ETH_USD_1MIN').find({}))
 
 # Remove ObjectIDs since they're not serializable and I don't need them.
 def remove_objectID(dict):
@@ -25,7 +27,9 @@ BTC_1 = []
 BTC_15 = []
 BTC_30 = []
 
+ETH_1 = []
 
+"""
 for dict in BTC_1_temp:
 	del dict['_id']
 	BTC_1 += [dict] 
@@ -35,10 +39,18 @@ for dict in BTC_15_temp:
 for dict in BTC_30_temp:
 	del dict['_id']
 	BTC_30 += [dict]
+"""
+for dict in ETH_1_temp:
+	del dict['_id']
+	ETH_1 += [dict]
 
+"""
 with open('BTC_1.json', 'w') as f:
 	json.dump(BTC_1, f)
 with open('BTC_15.json', 'w') as f:
 	json.dump(BTC_15, f)
 with open('BTC_30.json', 'w') as f:
 	json.dump(BTC_30, f) 
+"""
+with open('ETH_1.json', 'w') as f:
+	json.dump(ETH_1, f) 
