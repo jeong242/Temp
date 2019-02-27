@@ -1,4 +1,5 @@
 import json
+import numpy
 alpha = 0.033499
 
 ##### Different moving average functions #####
