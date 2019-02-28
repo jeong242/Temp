@@ -58,7 +58,7 @@ def measure(moving_average, list):
 	# Predicting using moving average method
 	for j in range(size-30):
 		predicted = moving_average(0,known,size+j)
-		known += [predicted + random.normal(0,0.02)]
+		known += [predicted + random.normal(0,0.005)]
 		print(predicted)
 
 	return delta(init,predicted)
