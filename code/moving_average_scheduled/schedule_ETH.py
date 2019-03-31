@@ -2,7 +2,7 @@
 from pymongo import MongoClient
 import json
 import get_data 
-import m_avg
+import m_avg_eth as m_avg
 from datetime import datetime
 from datetime import timedelta
 from pytz import timezone
