@@ -51,7 +51,7 @@ with open('../../data/ETH_1.json', 'r') as r:
 
 ##### Prediction using moving average #####
 # Return number of correct predictions.
-def measure(moving_average, list, Window_size=0, normal = True, mu=0, sd=1):
+def measure(moving_average, list, Window_size=0, normal = True, mu=0, sd=1,probability=0):
 	from numpy import random
 	count = 0
 	finals = []
@@ -91,6 +91,15 @@ def measure(moving_average, list, Window_size=0, normal = True, mu=0, sd=1):
 		
 		true_result = delta(init,final)
 		predicted_result = delta(init,predicted)
+		
+		from random import randint
+		prob = randint(0,1000)
+		if prob < probability:
+			if predicted_result == 'i':
+				predicted_result = 'd'
+			else:
+				predicted_result = 'i'
+		
 		if true_result == predicted_result:
 			count += 1
 
@@ -124,6 +133,6 @@ def rmse(moving_average, list, Window_size):
 	
 
 # Find the percentage of correct predictions.
-def get_accuracy(moving_average, list, normal=True,mu=0,sd=1):
-	result = measure(moving_average, list,0,normal,mu,sd)
+def get_accuracy(moving_average, list, normal=True,mu=0,sd=1,probability=0):
+	result = measure(moving_average, list,0,normal,mu,sd,probability)
 	return (result[0]/result[1])*100

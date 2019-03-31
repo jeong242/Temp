@@ -12,6 +12,7 @@ db = MongoClient('13.125.150.105',
 									authSource='BINANCE').BINANCE 
 
 BTC_1_temp  = list(db.get_collection('BTC_USD_1MIN').find({}))[-121:-1]
+ETH_1_temp  = list(db.get_collection('ETH_USD_1MIN').find({}))[-121:-1]
 
 """
 BTC_15_temp = list(db.get_collection('BTC_USD_15MIN').find({}))
@@ -27,10 +28,15 @@ BTC_1 = []
 BTC_15 = []
 BTC_30 = []
 
+ETH_1 = []
 
 for dict in BTC_1_temp:
 	del dict['_id']
 	BTC_1 += [dict] 
+
+for dict in ETH_1_temp:
+	del dict['_id']
+	ETH_1 += [dict] 
 
 """
 for dict in BTC_15_temp:
