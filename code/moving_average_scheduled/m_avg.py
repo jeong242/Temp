@@ -23,7 +23,7 @@ def weighted_moving_average(start_index, list, Window_size):
 
 def alpha_moving_average(start_index, list, Window_size):
 	multiplier = alpha
-	average = list[0] * multiplier
+	average = float(list[0]) * multiplier
 
 	for i in range(start_index+1, start_index+Window_size):
 		multiplier *= (1-alpha)
@@ -54,7 +54,7 @@ def measure(moving_average, list):
 	# "known" sample data for predicting Window_size later
 	known = [list[n]['price_open'] for n in range(size)]	
 
-	print("size = "+str(size))
+#	print("size = "+str(size))
 
 	# Predicting using moving average method
 	for j in range(size-30):
